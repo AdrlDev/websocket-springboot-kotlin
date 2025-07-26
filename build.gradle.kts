@@ -1,4 +1,5 @@
 plugins {
+	id("application")
 	kotlin("jvm") version "2.2.0"
 	kotlin("plugin.spring") version "2.2.0"
 	id("org.springframework.boot") version "4.0.0-SNAPSHOT"
@@ -48,14 +49,12 @@ kotlin {
 	}
 }
 
-tasks.withType<Test> {
-	useJUnitPlatform()
+application {
+	mainClass.set("dev.adriele.websocket_server.WebsocketServerApplicationKt")
 }
 
-tasks.withType<Jar> {
-	manifest {
-		attributes["Main-Class"] = "dev.adriele.websocket_server.WebsocketServerApplicationKt"
-	}
+tasks.withType<Test> {
+	useJUnitPlatform()
 }
 
 tasks.withType<org.springframework.boot.gradle.tasks.bundling.BootJar> {

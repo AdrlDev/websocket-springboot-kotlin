@@ -1,15 +1,17 @@
-# ---------- Builder Image ----------
-FROM gradle:8.7.0-jdk21 AS builder
+# ---- Build Stage ----
+FROM gradle:8.4-jdk21 AS builder
 
 WORKDIR /app
 COPY . .
-RUN ./gradlew bootJar --no-daemon
 
-# ---------- Runtime Image ----------
-FROM eclipse-temurin:21-jre
+# Use this to build the executable Spring Boot JAR
+RUN ./gradlew bootJar
+
+# ---- Runtime Stage ----
+FROM eclipse-temurin:21-jre AS runtime
 
 WORKDIR /app
-COPY --from=builder /app/build/libs/*.jar app.jar
+COPY --from=builder /app/build/libs/websocket-server-0.0.1.jar app.jar
 
 EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-jar", "/app/app.jar"]
