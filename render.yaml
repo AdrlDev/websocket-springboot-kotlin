@@ -4,5 +4,5 @@ services:
     env: docker
     plan: free
     branch: main
-    dockerfilePath: ./Dockerfile
+    dockerfilePath: Dockerfile
     runtime: docker
