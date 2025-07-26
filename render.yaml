@@ -1,11 +1,8 @@
 services:
   - type: web
     name: websocket-server
-    env: java
-    buildCommand: ./gradlew build
-    startCommand: java -jar build/libs/websocket-server-0.0.1.jar
+    env: docker
+    plan: free
     branch: main
-    autoDeploy: true
-    envVars:
-      - key: JAVA_VERSION
-        value: 21
+    dockerfilePath: ./Dockerfile
+    runtime: docker
