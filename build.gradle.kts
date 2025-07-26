@@ -51,3 +51,13 @@ kotlin {
 tasks.withType<Test> {
 	useJUnitPlatform()
 }
+
+tasks.withType<Jar> {
+	manifest {
+		attributes["Main-Class"] = "dev.adriele.websocket_server.WebsocketServerApplicationKt"
+	}
+}
+
+tasks.withType<org.springframework.boot.gradle.tasks.bundling.BootJar> {
+	mainClass.set("dev.adriele.websocket_server.WebsocketServerApplicationKt")
+}
