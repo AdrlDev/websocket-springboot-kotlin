@@ -4,6 +4,8 @@ services:
     env: java
     buildCommand: ./gradlew build
     startCommand: java -jar build/libs/websocket-server-0.0.1.jar
+    branch: main
+    autoDeploy: true
     envVars:
       - key: JAVA_VERSION
         value: 21
